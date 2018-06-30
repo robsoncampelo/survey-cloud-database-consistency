@@ -1,0 +1,162 @@
+\documentclass{sig-alternate-10pt}
+\newcommand\correspondingauthor{\thanks{Corresponding Author}}
+\usepackage[paperwidth=8.5in, paperheight=11in, margin=1in]{geometry}
+\usepackage{graphicx,url} 
+\usepackage[utf8]{inputenc} 
+\usepackage{graphicx} 
+%\usepackage{caption}
+\graphicspath{{img/}}
+\usepackage [autostyle, english = american]{csquotes}
+\MakeOuterQuote{"}
+\usepackage{array, makecell}
+\setcellgapes{4pt}
+\usepackage[T1]{fontenc}
+\usepackage{verbatim}
+\usepackage{color}
+\usepackage{multirow}
+
+\definecolor{acolor}{rgb}{1,0.5,0}
+%\newcommand{\dg}{\color{acolor}}
+%\newcommand{\al}{\color{red}}
+%\newcommand{\rc}{\color{blue}}
+
+% Para retirar as cores do PDF, basta comentar os três comandos acima e descomentar os abaixo:
+
+\newcommand{\dg}{}
+\newcommand{\al}{}
+\newcommand{\rc}{}
+
+\title{A Brief Survey on Cloud Database Consistency}
+
+\def\sharedaffiliation{%
+\end{tabular}
+\begin{tabular}{c}}
+%
+\begin{document}
+	\pagestyle{empty}
+	
+	\numberofauthors{3}
+	\author{
+		% 1st. author
+		\alignauthor 
+        Robson A. Campêlo\correspondingauthor 
+		% 2nd. author
+		\alignauthor 
+        Dorgival Guedes     
+		% 3rd. author
+		\alignauthor 
+        Alberto H. F. Laender    
+		\sharedaffiliation
+		\affaddr{Department of Computer Science}  \\
+		\affaddr{Universidade Federal de Minas Gerais}   \\
+		\affaddr{Belo Horizonte, MG, Brazil} \\
+		\email{\{robson.campelo, dorgival, laender\}@dcc.ufmg.br}
+	}
+
+\maketitle
+
+\begin{abstract}
+Cloud computing is a general term that involves delivering hosted services over the Internet. With the accelerated growth in the volume of data used by applications, several organizations have moved their data into cloud servers to provide scalable, reliable and highly available services. A particularly challenging issue that arises in the context of cloud storage systems with geo\-graphi\-cally-distributed data replication is how to reach a consistent state for all replicas. In this survey, we review major aspects related to consistency issues in cloud data storage systems, categorizing recently proposed methods into three catego\-ries: (1)~static consistency methods, (2) dynamic consistency methods, and (3) consistency monitoring methods. 
+\end{abstract}
+\\
+
+\section{Introduction}
+
+\input{survey-section1}
+
+\section{Cloud Database Management}
+\label{sec:clouddbmngmt}
+\input{survey-section2}
+
+\section{Consistency models}
+\label{sec:consistencymodels}
+\input{survey-section2b}
+
+\section{A Taxonomy for Consistency Methods}
+\label{sec:taxonomy}
+\input{survey-section3}
+
+\section{Overview of Cloud Database Consistency Methods}
+\label{sec:overview}
+\input{survey-section4}
+
+\section{Discussion}
+\label{sec:discussion}
+\begin{table*}[t]
+	\centering
+	\setlength\tabcolsep{4pt}
+	\caption{Storage Requirements Supported by the Consistency Methods}
+	\label{tab:storageRequirements}
+	\begin{tabular}{|c|c|l|l|l|l|l|l|l|l|}
+		\hline
+		Category & Representative Systems  & \multicolumn{8}{|c|}{Storage Requirements
+        {\al {\cite{ju2011survey, rimal2009taxonomy}}}} \\
+		\hline
+		&                 & 
+		\rotatebox{90}{Automation} &  
+		\rotatebox{90}{Availability} & 
+		\rotatebox{90}{Elasticity} & 
+		\rotatebox{90}{Fault Tolerance~} & 
+		\rotatebox{90}{Low-Latency}  & 
+		\rotatebox{90}{Performance} &  
+		\rotatebox{90}{Reliability} & 
+		\rotatebox{90}{Scalability}\\ 
+		\hline   
+		
+		\multirow{3}{*}{ \begin{tabular}[c]{@{}c@{}} Static Consistency \\ Methods \end{tabular}}                & 
+		PNUTS \cite{cooper2008pnuts}     &  & \checkmark &   & \checkmark &  &   & \checkmark & \checkmark  \\ \cline{2-10} 
+		& Spanner \cite{Corbett:2013} &  & \checkmark &  & \checkmark  & \checkmark &  &  & \checkmark \\ \cline{2-10}
+		& Clock-SI \cite{Du2013} &  & \checkmark &  &  & \checkmark & \checkmark &  & \checkmark \\
+		\hline \hline
+		
+		\multirow{6}{*}{ \begin{tabular}[c]{@{}c@{}} Dynamic Consistency \\ Methods \end{tabular}}    & 
+		Indigo \cite{balegas2015putting} &  &  &  & \checkmark & \checkmark &  &  &   \\ \cline{2-10} 
+		& SSOR \cite{Chen:2014} &  &  & \checkmark & \checkmark &   & \checkmark  & \checkmark & \checkmark  \\ \cline{2-10} 
+		& Harmony \cite{chihoub2012harmony} & \checkmark & \checkmark  & \checkmark &  & \checkmark & \checkmark  &   &  \\ \cline{2-10}
+		& VFC \cite{esteves2012quality} & \checkmark & \checkmark  &   &  & \checkmark & \checkmark & \checkmark & \checkmark  \\ \cline{2-10}
+		& DynamoDB \cite{sivasubramanian2012amazon} &   & \checkmark & \checkmark  &   & \checkmark & \checkmark & \checkmark & \checkmark  \\ \cline{2-10}
+		& Pileus \cite{Terry:2013} & \checkmark & \checkmark &   & \checkmark &  & \checkmark & \checkmark & \checkmark  \\ \hline \hline
+		
+		\multirow{3}{*}{ \begin{tabular}[c]{@{}c@{}} Consistency Monitoring \\ Methods \end{tabular}}    & 
+		VICOS \cite{BrandenburgerCK15} &  \multicolumn{8}{|c|}{not applied}   \\ \cline{2-10} 
+		& CaaS \cite{liu2014consistency} &  \multicolumn{8}{|c|}{not applied}  \\ \cline{2-10} 
+		& DMR-PDP \cite{MukundanML12} &  \multicolumn{8}{|c|}{not applied}  
+		\\ \hline 
+	\end{tabular}
+\end{table*}
+
+\input{survey-section5}
+
+\section{Conclusions}
+\label{sec:conclusions}
+\begin{table*}[t]
+	\setlength\extrarowheight{4pt}
+	\centering
+	\caption{Summary of the Surveyed Methods}
+    \vspace{1mm}
+	\label{tab:surveyedMethods}
+	\begin{tabular}{>{\raggedright\arraybackslash}p{4cm}>{\raggedright\arraybackslash}p{4.5cm}>{\raggedright\arraybackslash}p{7.5cm}}
+		\hline
+		Category   & Method    & Brief Description       \\ \hline
+		Static Consistency & Event Sequencing-based Consistency \cite{cooper2008pnuts} & Establishes that all replicas of a given record apply all updates to a record in the same order.     \\                                                   
+		& Clock-based Strict Consistency \cite{Corbett:2013, Du2013} & Uses clock-based mechanisms to control timestamps to enforce strict consistency. \\ \hline
+		
+		Dynamic Consistency                                                                     & Automated and Self-Adapt\-ive Con\-sist\-en\-cy \cite{chihoub2012harmony, esteves2012quality, Terry:2013} & Provides a gradually and dynamically tunable consistency level at runtime according to the applications' consistency requirements. \par Enforces increasing degrees of consistency for different types of data, based on their semantics.\\
+		& Flexible Consistency Guarantees \cite{balegas2015putting, Chen:2014, sivasubramanian2012amazon} & Allows applications to specify consistency rules, or \textit{invariants}, that must be maintained by the system. \par Supports the applications' consistency requirements and flexibly adapt to predefined consistency models. \par Allows applications to perform eventually or strongly consistent reads as needed.  \\ \hline
+		
+		Consistency Monitoring  & Consistency Verification \cite{BrandenburgerCK15, MukundanML12} & Enables a group of mutually trusting clients to detect data-integrity and consistency violations.  \par Allows the data owner to ensure that the Cloud Service Provider stores all data copies that are agreed upon in the service level contract.  \\
+		& Consistency Auditing \cite{liu2014consistency} & Implements a Local and Global Auditing structure to allow a group of clients to detect the occurrence of consistency violations.    \\
+		\hline
+	\end{tabular}
+\end{table*}
+
+\input{survey-section6}
+\vspace{2mm}
+\section{ACKNOWLEDGEMENTS}
+This research is funded by projects InWeb (grant MCT/CNPq 573871/2008-6), MASWeb (grant FA\-PE\-MIG/PRONEX APQ-01400-14) and EUBR AT\-MOS\-PHERE, and by the authors' individual grants from CAPES, CNPq and FAPEMIG. The authors would also like to thank Jos\'e Palazzo Moreira de Oliveira for his comments on a draft of this work. 
+\vspace{2mm}
+
+\bibliographystyle{plain}
+\bibliography{sigproc} 
+	
+\end{document}

@@ -1,0 +1,41 @@
+In this section, we propose a taxonomy for categorizing the various consistency methods addressed in this survey. The proposed taxonomy categorizes these methods as follows: \emph{static consistency methods, dynamic consistency methods, and consistency monitoring methods}. 
+
+Our criteria for proposing this taxonomy are based on the similarities of the core ideas behind the methods, %in which we observed the common aspects in their approaches, 
+which led us to consider these three categories as the most representative to categorize them. In what follows, we describe the main characteristics of the methods that belong to each category. 
+\vspace{3mm}
+
+\subsection{Static Consistency Methods}
+
+This category includes those methods that provide consistency guarantees in cloud storage systems, but are not flexible enough to support self-adaptivity according to the applications' consisten\-cy requirements, \textit{i.e.}, such methods do not offer a diversity of consistency model options. Representative methods in this category are of two types: \textit{Event Sequencing-based Consistency} and \textit{Clock-bas\-ed Strict Consistency}, which have been  imple\-mented  in systems like PNUTS~\cite{cooper2008pnuts}, and  Spanner~\cite{Corbett:2013} and Clock-SI~\cite{Du2013}, respectively.
+\vspace{3mm}
+
+\begin{comment}
+
+%This category includes those methods that rely on mechanisms proposed to provide consistency in cloud storage systems that {\al support service-oriented replication or partitioned data storage}. 
+This category includes those consistency methods that rely on mechanisms that support service-oriented replication or partitioned data storage.
+The predominant characteristic of these methods is that 
+%the consistency guarantees 
+they are not flexibile enough to support the clients' consistency requirements and, therefore, do not provide a diversity of consistency options. %in accordance to the Service Level Agreement (SLA).  
+Representative methods in this category 
+%{\rc are \textit{Event Sequencing-based Consistency} (PNUTS~\cite{cooper2008pnuts}) and \textit{Clock-bas\-ed Strict Consistency} (Spanner~\cite{Corbett:2013}, Clock-SI~\cite{Du2013})}.
+{\al are of two types: \textit{Event Sequencing-based Consistency} and \textit{Clock-bas\-ed Strict Consistency}, which have been  imple\-mented  in systems like PNUTS~\cite{cooper2008pnuts}, and  Spanner~\cite{Corbett:2013} and Clock-SI~\cite{Du2013},  respectively}.
+
+\end{comment}
+
+\subsection{Dynamic Consistency Methods}
+
+The methods in this category implement mechanisms that provide dynamic characteristics such as self-adaptive 
+%consistency methods that automatically adjust the degrees of consistency 
+or flexible consistency guarantees, which allows the selection or specification of the desired consistency level. 
+%The methods included in this category 
+They are of two types: \textit{Automated and Self-Adaptive Consistency,} and \textit{Flexible Consistency}. The first type has been implemented in systems like Harmony~\cite{chihoub2012harmony}, VFC$^3$~\cite{esteves2012quality} and Pileus \cite{Terry:2013}, whereas the second one supports systems like 
+Indigo~\cite{balegas2015putting}, SSOR~\cite{Chen:2014} and Amazon DynamoDB~\cite{sivasubramanian2012amazon}. 
+\vspace{3mm}
+
+\subsection{Consistency Monitoring Methods}
+
+Alternatively, instead of directly handling data consistency issues, some methods focus on providing mechanisms that allow data owners to detect the occurrence of consistency violations in the cloud storage. This means that 
+%by {\al  using these} methods a group of clients might perform auditing on their data and make decisions based on how the Cloud Service Provider (CSP) stores and manages {\rc all data copies {\al  according to the consistency level that has been agreed upon} in  the service level contract. 
+clients might audit their own data and make decisions based on how the Cloud Service Provider (CSP) stores and manages their data copies according to the consistency level that has been agreed upon in  the service level contract. 
+The methods in this category are of two types, \textit{Consistency Verification} and \textit{Consistency Auditing}, and have been respectively implemented in VICOS~\cite{BrandenburgerCK15}, and in DMR-PDP~\cite{MukundanML12} and CaaS~\cite{liu2014consistency}.
+\vspace{3mm}

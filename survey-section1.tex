@@ -1,0 +1,37 @@
+%Cloud computing is a general term that involves delivering hosted services over the Internet. The term ``cloud'' is an abstraction of this new model that arose from a network connectivity architecture involving several {\al data} providers stored in external servers.
+
+Cloud computing is a general term that includes the idea of delivering hosted services over the Internet. The term ``cloud'' is an abstraction of this new model that arose from a common representation of a network, since the particular location of a service is not relevant, {\al which means that services and data providers are seen} as existing ``in the network cloud''.
+
+In recent years, cloud computing has emerged as a paradigm that attracts the interest of organizations and users {\al due to} its potential for cost savings, unlimited scalability and elasticity in data management. In this paradigm, users acquire computing and storage resources in a pricing model which is known as \emph{pay-as-you-go} \cite{Al-Roomi13}. According to this model, IT resources are offered in an unlimited way and the payment is made according to the actual resources used for a certain period, similarly to the traditional energy pricing model.
+
+
+%Cloud deployment models can be grouped into four types: private, public, hybrid and community~\cite{mell2009nist}. In these environments, the services are provided without the users' concern about how this process occurs. 
+Depending on the kind of resource offered to the users, cloud services tend be grouped in the following three basic models: \emph{Software as a Service} (SaaS)~\cite{dubey2007delivering}, \emph{Platform as a Service} (PaaS)~\cite{beimborn2011platform} and \emph{Infrastructure as a Service} (IaaS)~\cite{bhardwaj2010cloud}. As an extension of this classi\-fication, when the service refers to a database, the model is known as \emph{Database as a Service} (DBaaS)~\cite{curino2011relational}, {\al which is the focus of this survey}. {\rc  This model provides transparent mechanisms to create, store, access and update databases. Moreover, the database service provider ensures full responsibility for the database administration, guaranteeing backup, reorganization and migration to new system versions.}
+%Moreover, the database service provider ensures the entire responsibility of  database adaministration, i.e., database backup, administration, reorganization or migration from one database version without impacting such an organization.
+
+%With the accelerated growth in the volume of data {\al used} by the applications, several organizations have moved their data into cloud servers to provide scalable, reliable and highly available services. Cloud servers enable service providers to store and customize their data across multiple data centers, separating them physically to meet a growing demand. In this way, services can replicate their state among geographically diverse locations and direct the user to the nearest or most recently accessed one. %location. 
+%Thus, replication has become an essential feature of this storage model and is extensively exploited in cloud environments \cite{Chang06bigtable:a, Ibrahim12}. Moreover, replication allows users to obtain various features such as fast access, improved performance and high availability.
+%
+% DG: o parágrafo acima foi reorganizado na forma a seguir:
+%
+The use of DBaaS cloud servers enables service providers to replicate
+and customize their data over multiple servers, which can be physically separated and placed in different data centers.
+By doing so, {\al they} can meet a growing demand by directing users to the nearest, or most recently accessed server. In that way, replication allows {\al them} to achieve features such as fast access,improved performance and higher availability. Thus, replication has become an essential feature of this storage model and is extensively exploited in cloud environments~\cite{Chang06bigtable:a, Ibrahim12}.
+
+A particularly challenging issue that arises in the context of cloud storage systems with geo\-graphi\-cal\-ly-distributed data replication is how to reach a consistent state in all replicas. {\dg In the cloud environment, computer failures and network partitions cannot be completely avoided.} Enforcing synchronous replication to ensure strong consistency {\dg in such an environment} incurs in a significant performance overhead, due to the problem of high network latency between data centers~\cite{goel2007data} 
+{\dg and the fact that network partitions may lead to service unavailability~\cite{Brewer2000}}. 
+As a consequence, specific models have been proposed to ensure weaker or relaxed consistency guarantees.
+%in the form of {\bf eventual consistency.}
+
+Several cloud storage services choose to ensure availability and performance {\dg even in the presence of network partitions} rather than {\al to use} a stronger consistency model. NoSQL-based data storage environments provide consistency properties in  eventual mode~\cite{Vogels:2009}. However, using this type of consistency increases the probability of reading obsolete data, {\al since} the replicas being accessed may not have received the most recent writes. This led to the development of adaptive consistency solutions, which were introduced to allow adjusting the level of consistency at runtime in order to improve performance or reduce costs, while maintaining the percentage of obsolete reads at low levels~\cite{chihoub2012harmony, esteves2012quality, Terry:2013}.
+
+A consistency model in distributed environments seeks to guarantee the consistency of an update operation, as well as the access to an updated object. Obtaining the correct balance between consistency and availability is one of the challenges still existing in cloud computing~\cite{Elbushra:2014}. In this survey, we focus on state-of-the-art  methods for data consistency in cloud environments. Considering the different solutions, we categorize these recently proposed methods into three %potential 
+distinct categories: (1) static consistency methods, (2) dynamic consistency methods and (3) consistency monitoring methods.
+
+The remainder of this survey is organized as follows. In Section 2, we present general concepts related to cloud database management. In Section 3, we approach the main consistency models adopted by existing distributed storage systems. 
+%In Sections 4 and 5, respectively, we present a taxonomy proposed to categorize the {\al  most prominent} consistency methods {\al found in the literature} and overview {\al each one} of them.
+In Sections 4 and 5, we present, respectively, a taxonomy proposed to categorize the most prominent consistency methods found in the literature and an overview~of the main approaches adopted to implement them. In Section~6, we provide a sum-up discussion emphasizing the main aspects of the surveyed methods.
+%we discuss the methods} we have surveyed. 
+Finally, in Section 7, we conclude the survey by summarizing its major issues.
+%\\
+\vspace{2mm}

@@ -1,0 +1,199 @@
+In this section, we present an overview of 
+%the types of strategy 
+the main approaches adopted %strategies provided 
+by the consistency methods addressed in this survey. These methods are among the most representative in the literature, although our survey is not exhaustive. The presentation follows the taxonomy introduced in Section~4. 
+%In this section, {\al we present an overview of the consistency methods we address in this survey. {\rc The approach of each method is based on the description of the systems we have found in the literature that implement them.} These methods are among the most representative in the literature, although our survey is not exhaustive. The presentation below follows the taxonomy introduced in Section~4.}
+\vspace{1mm}
+
+\subsection{Static Consistency Methods}
+
+As mentioned earlier, the methods in this category provide fixed guarantees, not being able, for example, to adjust their behavior to take advantage of situations where a stronger consistency might be temporarily available. {\al As we shall see next,} {\dg they can be divided into two types: those based on the sequence of events and those based on clock timestamps.} %{\rc We discuss them next.}
+\vspace{1mm}
+
+\subsubsection{Event Sequencing-based Consistency}
+
+This type of consistency method aims to hide the replication complexity by providing a consistency model that lies between the two extremes of general serializability and eventual consistency. The key aspect behind this type of method is the observation that 
+%serializability os transactions is inefficient
+transaction serializability is costly and often unnecessary in web applications~\cite{cooper2008pnuts}.
+
+The most representative system that implements this type of method is PNUTS~\cite{cooper2008pnuts}, which is a massively parallel and geographically distributed DBMS developed by Yahoo for web applications. PNUTS developers observed that web applications typically manipulate one record at a time, whereas different records may be located in different geographic locality. Hence, an event sequencing-based consistency method establishes that all replicas of a given record receive all updates applied to that record in the same order. This strategy is implemented by designating one of the replicas as the master for each record, so that this master receives all writes sent to that record by the other replicas. If a record has the majority of its writes sent to a particular replica, this replica becomes the master for that record.
+\vspace{1mm}
+
+%PNUTS \cite{cooper2008pnuts} is a massively parallel and geographically distributed DBMS  developed for Yahoo!’s web applications. It provides several features such as scalability, high availability and fault tolerance, and relaxed consistency guarantees. Although many distributed replicated data storage systems choose to provide eventual consistency, PNUTS offers an {\rc event sequencing-based consistency method}, {\al since the eventual consistency model is often too weak and unappropriated for web applications \cite{cooper2008pnuts}.This consistency method aims to hide the replication complexity, thus providing a consistency model that is between the two extremes of general serializability and eventual consistency.} 
+
+%The key aspect of this method is the observation that serializability of general transactions is inefficient and often unnecessary in web applications. On the other hand, enforcing only eventual consistency where all updates will eventually be applied {\al in a different order on different replicas} is also inadequate for web applications. The PNUTS' developers observed that {\al web applications typically manipulate one record at a time whereas different records may have activity with different geographic locality~\cite{cooper2008pnuts}.} Hence, their method establishes that all replicas of a given record apply all updates to the record in the same order. 
+
+%The per-record timeline consistency method is implemented by 
+%the establishment of one of the replicas to be designated 
+%\al  designating one of the replicas as the master for each record so that this master receives all updates to that record that were sent by the other replicas.} If a record has the majority of its writes sent to a particular replica, this replica will become the master for that record.\\
+
+\subsubsection{Clock-based Strict Consistency}
+
+Systems that implement this type of consistency method are characterized by the use of clock-based mechanisms to control timestamps to enforce strict consistency \cite{Corbett:2013, Du2013}. They offer the guarantee that arbitrary objects in the data store are accessed atomically and isolated from concurrent accesses. 
+%For that, it is provided strong semantics with general purpose transactions, supporting read and write operations.
+The approach behind this consistency method is based on the  
+ability of a system to provide a timestamp log to track the order in which operations occur. 
+%In some distributed DBMS, a timestamp-based algorithm is used for controlling concurrency allowing to safely handle transactions.
+
+Spanner \cite{Corbett:2013} and Clock-SI \cite{Du2013} are representative systems that implement this type of consistency method. The former is a relational-like distributed data store system developed by Google. It assigns globally-meaningful commit timestamps that reflect the serialization order of the transactions, which may be distributed. Spanner also enforces that if a transaction \textit{T$_{2}$} begins after the commit of a transaction \textit{T$_{1}$}, then the commit timestamp of \textit{T$_{2} $} must be greater than the commit timestamp of \textit{T$_{1}$}.
+
+%{\color{green}It assigns commit timestamps that reflect the serialization order of the transactions. Hence, a commit operation receives a timestamp \emph{C} to update once a transaction acquire all the locks. In addition, a read-only operation receives a timestamp \emph{S} by reading the local physical clock. Operations assigned to a timestamp \emph{S} that are related to a same physical timestamp \emph{T} are blocked by Spanner in case it cannot yet be ensured that no new operations assigned to a timestamp \emph{C} will be able to perform with \textit{T'} <~\textit{T}. Obs: Na discussão acima, as variáveis $C, S, T, T'$ não ajudam na descrição do método pois não há nenhuma relação entre elas.}
+
+On the other hand, Clock-SI implements the so called \textit{snapshot isolation}, which is a consistency criterion for partitioned data storages. In this strategy, read-only operations read from a consistent snapshot and other operations perform a commit if no objects written by these transactions were
+concurrently written. The local physical clock is used by each transaction to identify its read timestamp.
+\vspace{1mm}
+
+%Clock-SI \cite{Du2013} and Spanner \cite{Corbett:2013} are {\al data store} systems that use clock-based mechanisms to control timestamps to enforce strict consistency. They offer the guarantee that arbitrary objects in the data store will be accessed atomically and isolated from concurrent accesses. For that, both solutions provide strong semantics with general purpose transactions, supporting read and write operations. The approach of using the system's clock is based on the system's ability to perform timestamp event log to track the order in which they occur. In some distributed DBMS, a timestamp-based algorithm is used for controlling concurrency allowing to safely handle transactions. 
+
+%Clock-SI \cite{Du2013} implements the so called \textit{Snapshot Isolation} (SI), which is a consistency criterion for partitioned data storage. In this mechanism, read-only operations read from a consistent snapshot and other operations perform commit if no objects written by these transactions were also written concurrently. The local physical clock is used by each transaction in order to identify its read timestamp.
+
+%Spanner \cite{Corbett:2013} is Google’s {\al relational-like distributed data store system} that supports scalable, globally-distributed and replicated databases. It assigns a timestamp \emph{S} to possibly read-only operations by reading the local physical clock. Equivalently, it assigns a commit timestamp \emph{C} to update operations once that these transactions acquire all the locks over the write-set \emph{W}, which is then used to version the new data items. Moreover, read transactions related to a physical timestamp \emph{T} are blocked by Spanner in case it cannot yet be ensured that no new update operation will be able to perform a commit with a timestamp \textit{T'} < \textit{T}.
+
+\subsection{Dynamic Consistency Methods}
+
+Some methods may be able to adjust guarantees based on the observation of access patterns and {\al system structural aspects. We discuss them next.}
+
+\vspace{2mm}
+\subsubsection{Automated and Self-adaptive Consistency}
+
+This type of consistency method aims to dynamically enforce multiple consistency degrees over distinct data objects.  
+Three main approaches %strategies %related to
+have been adopted to implement such methods. 
+
+%{\rc  probabilistic computation~\cite{chihoub2012harmony}, consistency vector \cite{esteves2012quality} and dynamic server selection}~\cite{Terry:2013}. 
+
+The first approach is based on probabilistic computations that provide an estimation of the stale reads rate. Once the estimation model is computed, it is possible to identify the key parameter that affects the stale reads and scale up/down the number of replicas involved in read operations in order to maintain a low tolerable fraction of stale reads. This approach is mainly implemented by Harmony~\cite{chihoub2012harmony}, which is a consistency-based system that aims to gradual and dynamically tune the consistency level at runtime according to the applications' consistency requirements.
+
+The second approach allows the evaluation and enforcement of divergence bounds over data objects (table/row/column), so that the consistency levels can be automatically adjusted based on statistical information. The evaluation takes place on a divergence vector every time an update request is received, although it is necessary to identify the affected data objects. If any limit is exceeded, all updates since the last replication are placed in a FIFO-like queue to be propagated and executed on other replicas. 
+%allows the definition and dynamic enforcement of multiple consistency degrees over different groups of data, within the same application, across very large scale networks of cloud data centers. This model is driven by the different semantics that data might have, and the consistency levels can be automatically adjusted based on statistical information.
+%of three-dimensional consistency vectors that can be associated with {\rc data objects.
+%each data item. 
+%These vectors ($\kappa$) are used to bound the maximum objects divergence, which is represented by a numerical scalar associated to the three orthogonal constraints: Time ($\theta$), Sequence ($\sigma$) and Value ($\nu$).}
+%The constraint time ($\theta$) specifies the maximum time a replica can be without being updated with is latest value. {\rc Thus, given a data object \textit{o}, by the constraint $\theta$(\textit{o}) can be obtained the time (e.g., seconds) passed since the last replica update of this data object.}
+%The constraint sequence ($\sigma$) specifies the maximum number of updates that can be applied to an object without refreshing its replicas. {\rc Thus, given a data object \textit{o}, by the constraint $\sigma$(\textit{o}) can be obtained the number of applied updates to this data object.} 
+%Finally, the constraint value ($\nu$) specifies the maximum relative difference between replica contents or against a constant, {\rc capturing the impact or importance of updates on the data object’s internal state. Thus, given a data object \textit{o}, by the constraint $\nu$(\textit{o}) can be obtained that difference (e.g., in percentage).}  
+%Once it is specified the intervals of values on the vectors ($\kappa$), the consistency intensity is automatically adjusted. {\rc  
+%This adjustment is based on the observation of the frequency of read and write transactions.} 
+The most representative system that implements 
+%framework that implements 
+this approach is VFC$^3$ (\textit{Versatile Framework for Consistency ~in Cloud Computing})~\cite{esteves2012quality}, which provides three-dimensional consistency Qual\-ity-of-Service vectors, where users can specify consistency parameters according to the QoS level desired, thus letting the system automatically adjust the consistency degree.
+% a consistency model that aims to enforce increasing degrees of consistency for different types of data.
+
+Finally, the third approach is characterized by dynamically selecting to which server (or even set of servers) each read of a record must be directed, so that the best service is delivered given the current configuration and system conditions. Hence, this approach is adaptable to distinct configurations of replicas and users, as well as to changing conditions such as variations on the network performance or server load. Another important aspect of this approach is the fact that it allows application developers to provide a Service Level Agreement (SLA) that specifies the applications' consistency/latency desires in a declarative manner. Pileus~\cite{Terry:2013} is a key-value storage system that implements this approach. It provides a diversity of consistency guarantee options for globally distributed and replicated data environments. It also allows several systems or even clients of a system to achieve different consistency degrees, even while sharing the same data.
+
+\begin{comment}
+Harmony \cite{chihoub2012harmony} is a consistency-based system that aims {\al to gradually and dynamically} tune the consistency level at runtime {\rc  according to the applications' consistency requirements.} It also %aims to
+{\al handles specific} issues related to data consistency, such as network latency, that directly affect {\al the propagation of updates to replicas}, and the frequency of access patterns during reads, writes and updates, which represents the application’s demands. These issues may increase the probability of stale reads and Harmony {\al aims to specifically reduce this.}
+
+The self-adaptive consistency method proposed by Harmony is based on probabilistic computations that provide an
+estimation of the stale reads rate. Once the estimation model is computed, it is possible to identify the key parameter that is affecting the stale reads, and scale up/down the number of replicas involved in read operations in order to maintain a low tolerable fraction of stale reads.
+
+Pileus~\cite{Terry:2013} is a key-value storage system that provides a diversity of consistency {\al guarantee options for globally distributed and replicated data environments.} %by a method of selection of consistency guarantees, which are located between a strict and eventual consistency level. It allows several systems or {\al even clients} of a system to achieve different consistency {\al guarantee levels}, even while sharing the same data. Pileus {\al aims to} reduce the responsibility of system developers of {\al having to explicitly choose} a single ideal con\-sist\-en\-cy level. This is a very significant feature due to the problem {\al  imposed by} multi-consistency storage services, in which {\al system developers} must decide at development time which consistency level to adopt. {\al Since different clients require distinct performance and consistency levels for their applications,} it is difficult to choose a consistency-performance pair that satisfies all clients in a wide range of scenario.
+
+{\al Thus, to overcome this difficulty, Pileus allows application developers to provide a Service Level Agreement (SLA) that specifies the application’s consistency/latency desires in a declarative manner~\cite{Terry:2013}.} 
+%The proposed method uses Service Level Agreements (SLA) in which is specified the system’s consistency/latency desired level in a declarative manner. 
+An SLA may indicate a large range of acceptable consistency/latency trade-offs. Pileus dynamically selects to which server, or even a set of servers, each read is directed, so that the best service is delivered given the current configuration and system conditions. Hence, it adapts to distinct configurations of replicas and users, as well as to changing conditions, including variations in network or server load.
+
+Versatile Framework for Consistency
+in~~Cloud Computing (VFC$^3$) \cite{esteves2012quality} {\al is} a consistency model that aims to enforce increasing degrees of consistency for different types of data. 
+%based on their semantics.
+{\al It provides different} degrees of consistency that can be automatically adjusted based on statistical information, {\al being particularly suitable to large-scale and dynamic environments that need to syncronize large amounts of data over several geographically dispersed points.}
+%in case of these environments have large amounts of data to be synchronized and there are several geographically dispersed points.
+
+The key aspect of VFC's consistency method is the definition of three-dimensional consistency vectors ($\kappa$) that can be associated with data items. Time ($\theta$) specifies the maximum time a replica can be without being updated with is latest value. Sequence ($\sigma$) specifies the maximum number of updates that can be applied to an object without refreshing its replicas. Value ($\nu$) specifies the maximum relative difference between replica contents or against a constant, thus it captures the impact or importance of updates on the data items’ internal state. Once a client specify the intervals of values on the vectors ($\kappa$), VFC automatically adjust the consistency intensity. To perform this adjustment the VFC's Quality of Service (QoS) engine component observes the frequency of read and write operations to data items during a given time frame.
+\end{comment}
+
+\vspace{-0.2mm}
+\subsubsection{Flexible Consistency}
+
+This type of consistency method is characterized by its flexibility to adapt to predefined consistency models. In this context, there are three main approaches that implement this type of consistency: combining %the} %strengths of 
+both weak and strong consistency depending on the operation, adopting the notion of consistency regions and performing eventually or strongly consistent reads as needed~\cite{balegas2015putting, Chen:2014, sivasubramanian2012amazon}.
+
+The first approach aims to strengthen eventual consistency allowing the applications to specify consistency rules, or \textit{invariants}, that must be maintained by the system. Once these invariants are defined, it is possible to identify the operations that are potentially unsafe under concurrent execution, thus allowing one to select either a violation-avoid\-ance or an invariant-repair technique. Indigo \cite{balegas2015putting} is a middleware system that implements this approach. %strategy. 
+%It was designed to implement 
+It supports an alternative consistency method %that was 
+built on top of a geo-replicated key-value data store.
+
+The second approach is based on a formalism proposed to support the applications’ consistency requirements. The trade-off between consistency and scalability requirements is handled by introducing the notion of consistency regions and service-delivery-oriented consistency policies. A consistency region is defined as a logical unit that represents the application state-level requirements for consistency and scalability. This concept is used to define consistency boundaries that separate each group of services that need to be ordered. Hence, services that need to be kept consistent must be associated to a certain region. The definition of what region a service belongs to and which services that can concurrently be delivered is set by the system administrators. 
+
+\textit{Scalable Service Oriented Replication} (SSOR) \cite{Chen:2014} is a middleware that implements this approach. %strategy. 
+It covers three distinct types of consistency region: (1)~Conflict Region (CR), which is a region composed by services that have conflicting requirements for consistency regardless of the session; (2) Sessional Conflict Region (SCR), which is a region that includes services of a particular session with conflicting consistency requirements; and (3) Non-Con\-flict Region (NCR), which is a region that does not impose any consistency constraints or requirements.
+
+The third approach aims to provide elasticity and flexibility in order to handle unpredictable workloads, but allowing a system to be tuned for capacity. Due to this characteristic, it allows applications to perform eventually or strongly consistent reads as needed. Amazon DynamoDB~\cite{sivasubramanian2012amazon} is a highly reliable and cost-effective NoSQL database service that implements this  approach. %consistency strategy. 
+It was built based on the experience with its predecessor Dynamo~\cite{decandia2007dynamo}. DynamoDB adopts %the eventual consistency option
+eventual consistency as its default model, which does not guarantee that an eventually consistent read will always reflect the result of a recently completed write. On the other hand, when adopting a stronger consistency model, it returns a result that reflects all writes that have received a successful response prior to that read. \\
+%\vspace{4mm}
+
+\begin{comment}
+The Scalable Service Oriented Replication (SSOR) solution \cite{Chen:2014} is a middleware based on a formalism proposed to address the applications’ consistency requirements and flexibly adapt to predefined consistency models. The trade-off between consistency and scalability requirements is handled by the introducing of the notion of consistency regions and service delivery oriented to consistency policies.
+
+A consistency region is defined as a logical unit to represent the application state-level requirements for consistency and scalability. A component or application that consists of a number of services (service group) may consist of many regions, and each region contains one or more services. This concept is used to define consistency boundaries that separate each group of services that need to be ordered. Hence, services that need to be kept consistent must be associated to a certain region. The definition of what region a service belongs to and which services can concurrently be delivered is set by the systems administrators. Posteriorly, the consistency policies can then be used to coordinate corresponding reactions at the communication level protocols among the replicas.
+
+SSOR covers three distinct types of consistency region: (1) Conflict Region (CR) is a region composed by services that have conflicting requirements for consistency regardless of the session; (2) Sessional Conflict Region (SCR) is a region that includes services of a particular session with conflicting consistency requirements; Non-conflict Region (NR) is a region that does not impose any consistency constraints or requirements.
+
+Amazon DynamoDB \cite{sivasubramanian2012amazon} is a highly reliable and cost-effective NoSQL database service that {\al was} built based on the experience with its predecessor Dynamo~\cite{decandia2007dynamo}. Among other features, it was designed to provide high scalability for {\al large} Internet applications, {\al thus providing both} elasticity and flexibility in order to handle unpredictable workloads, {\al but allowing a system to tune for capacity.} Due {\al to this characteristic, it allows} applications to perform eventually or strongly consistent reads as needed.
+
+{\color{green}
+\noindent
+\textbf{(Versão anterior)}\par
+DynamoDB adopts an eventual consistency as default model and maximizes the read throughput, although it is not guaranteed that an eventually consistent read will always reflect the results of a recently completed write. On the other hand, if a strongly consistent read is chosen, it is returned a result that reflects all writes that received a successful response prior to the read. To get this result it is possible to specify optional parameters in a request, which imply that a strongly consistent read will take more resources to be processed than an eventually consistent read.
+
+Indigo \cite{balegas2015putting} is a middleware system designed to implement an alternative consistency method, so called \textit{Explicit Consistency} that has built on top of a geo-replicated key-value data store. This model aims to strengthen eventual consistency allowing the applications to specify consistency rules, or \textit{invariants}, that must be assuredly maintained by the system. Once these invariants that should be met are defined, the consistency method implemented by Indigo identifies the operations that are potentially unsafe under concurrent execution, and then one can select either violation-avoidance or invariant-repair techniques.
+
+The Indigo's approach is based on the supporting both weak and strong consistency, depending on the operation. Strong application invariants are guaranteed when it is needed, whereas it provides similar latency to an eventually-consistent system in the remain cases. Instead of to define consistency in terms of execution orders, the Indigo's consistency method define it in terms of application properties. Provided that the specified invariants are not affected, the system is free to reorder execution of operations at different replicas.
+}
+
+{\rc  
+\noindent
+\textbf{(versão atual)}\par
+DynamoDB adopts the eventual consistency option as its default model, where it is not guaranteed that an eventually consistent read will always reflect the results of a recently completed write. On the other hand, in a strongly consistent read option, it is returned a result that reflects all writes that received a successful response prior to the read.
+
+Indigo \cite{balegas2015putting} is a middleware system designed to implement an alternative consistency method, called \textit{Explicit Consistency}, that was built on top of a geo-replicated key-value data store. The approach behind this method is based on the attempt to combine the strengths of both weak and strong consistency, depending on the operation.
+
+Indigo aims to strengthen eventual consistency allowing the applications to specify consistency rules, or \textit{invariants}, that must be maintained by the system. Once these invariants are defined, the consistency method implemented by Indigo identifies the operations that are potentially unsafe under concurrent execution, thus allowing one to select either a violation-avoidance or a invariant-repair technique. Instead of defining consistency in terms of execution orders, Indigo defines it as application properties. Thus, provided that the specified invariants are not affected, the system is free to reorder the execution of operations at different replicas.
+}
+\end{comment}
+
+\vspace{-1mm}
+\subsection{Consistency Monitoring Methods}
+
+The methods in this category  
+%provide means for 
+allow the applications to evaluate the level of consistency that has been actually obtained during execution, so that they can make their own decisions on how to handle any problems when they arise. 
+% Acho que aqui não precisa dessa frase, pois o parágrafo já começa com "the methods in this cathegory", o que funciona como uma introdução para o que vem depois.
+% {\al We discuss them next.}
+
+\subsubsection{Consistency Verification}
+
+These methods rely on two approaches to consistency verification. The first consists of a protocol that enables a group of mutually trusting clients to detect consistency violations on a cloud storage, whereas the second provides a verification scheme that allows data owners to ensure whether the Cloud Service Provider (CSP) complies with the SLA for storing data in multiple replicas.
+
+%The protocol is implemented by VICOS
+This protocol-based approach is adopted by VICOS (Verification of Integrity and Consistency for Cloud Object Storage)~\cite{BrandenburgerCK15}. VICOS supports the optimal con\-sist\-ency concept of \textit{fork-linearizability}, which captures the strongest achievable notion of consistency in multi-client models. The method may guarantee this notion by registering the causal evolution of the user’s views into their interaction with the server. In case the server creates only a single discrepancy between the views of two clients, it is ensured that these clients will never observe operations of each other afterwards. That is, if these users communicate later and the server ever lies to them, the violation will be immediately discovered. Thus, users can verify a large number of past transactions by performing a single check.
+
+The verification approach is implemented by DMR-PDP~(\textit{Dynamic Multi-Replica-Pro\-vable Data Possession}) \cite{MukundanML12}. The context addressed by this scheme is that whenever data owners ask the CSP to replicate data at different servers, they are charged for this. Hence, data owners need to be strongly persuaded that the CSP stores all data copies that are agreed upon in the service level contract, as well as that all remotely stored copies correctly execute the updates requested by the users. %The proposed 
+This approach deals with such problems by preventing the CSP from cheating the data storage; for instance, by maintaining fewer copies than paid for. The scheme is based on a technique called \textit{Provable Data Possession}~\cite{ateniese2007provable}, used to audit and validate the integrity and consistency of data stored on remote servers.
+
+%Verification of Integrity and Consistency for Cloud Object Storage (VICOS) \cite{BrandenburgerCK15} is a protocol that enables a group of mutually trusting clients to detect data-integrity and consistency violations for cloud storage. It extends the standard idea of linearizability in distributed systems. In shared and distributed memory, this criterion is usually called atomic consistency and requires that the execution of a set of operations by all clients together is equivalent to a sequential execution, respecting the real-time ordering of the operations. 
+
+%VICOS supports the optimal consistency concept of \textit{fork-linearizability}, which captures the strongest achievable notion of consistency in multi-client models. The method may guarantee this notion by registering the causal evolution of the user’s views into their interaction with the server. In case the server creates only a single discrepancy between the views of two clients, it is ensured that these clients will never observe operations of each other afterwards. That is, if these users communicate later and the server ever lies to them, the violation will be immediately discovered. Thus, the users can verify a large number of past transactions by performing a single check.
+
+%Dynamic Multi-Replica Provable Data Possession (DMR-PDP) \cite{MukundanML12} is a scheme that allows data owners to ensure whether the Cloud Service Provider (CSP) complies with the service level agreement for storing data in multiple replicas. 
+
+%Whenever data owners ask the CSP to replicate data at different servers, they are charged for this. Hence, data owners need to be strongly persuaded that the CSP stores all data copies that are agreed upon in the service level contract, as well as that all remotely stored copies correctly execute the updates requested by the users. The proposed method aims to deal with such problems by preventing the CSP from cheating the data storage; for instance, by maintaining fewer copies than it was paid for. The scheme is based on a technique called \textit{Provable Data Possession} (PDP)~\cite{ateniese2007provable}, which is used to audit and validate the integrity and consistency of data stored on remote servers.
+
+\vspace{1mm} 
+\subsubsection{Consistency Auditing}
+
+This {\al kind of method is based on an architecture that %comprehends} 
+conists of} a large data cloud maintained by a {\al CSP}
+%Cloud Service Provider (CSP) 
+and multiple small audit clouds composed of a group of users that cooperate on a specific job ({\it e.g.}, {\al revising} a document or {\al writing} a program). The required level of consistency that should be provided by the data cloud is stipulated by {\al an SLA} 
+%Service Level Agreement (SLA) 
+involving the audit cloud and the data cloud. Once the SLA exists, the audit cloud can verify whether the data cloud violates {\al it}, thus quantifying, in monetary terms or otherwise, the severity of the violation.
+
+Consistency as a Service (CaaS) \cite{liu2014consistency} implements this method. It relies on a two-level auditing structure, name\-ly: \textit{local auditing} and \textit{global auditing}. Local auditing allows each user to independently perform local tracing operations, focusing on monotonic read and read-your-write consistencies. Global auditing, on the other hand, requires that an auditor is periodically elected from the audit cloud to perform global tracing operations, focusing on casual consistency. This type of method is supported by constructing a directed graph of operations, called the \textit{precedence graph}. If the constructed graph is a directed acyclic graph (DAG), the required level of consistency is preserved~\cite{liu2014consistency}.
+
+
+%Consistency as a Service (CaaS) \cite{liu2014consistency} is a model that consists of a large data cloud maintained by a Cloud Service Provider (CSP) and multiple small audit clouds composed of a group of users that cooperate on a specific job (e.g., a document or a program). The required level of consistency that should be provided by the data cloud is stipulated by a Service Level Agreement (SLA) involving the audit cloud and the data cloud. Once the SLA exists, the audit cloud can verify whether the data cloud violates the SLA, thus quantifying, in monetary terms or otherwise, the severity of the violations.
+
+%CaaS relies on a two-level auditing structure, name\-ly: \textit{local auditing} and \textit{global auditing}. Local auditing allows each user to independently perform local tracing operations, focusing on monotonic read and read-your-write consistencies. Global auditing, on the other hand, requires that an auditor is preodically elected from the audit cloud to perform global tracing operations, focusing on casual consistency. This type of consistency is supported by constructing a directed graph of operations, called the \textit{precedence graph}. If the constructed graph is a directed acyclic graph (DAG), the required level of consistency is preserved~\cite{liu2014consistency}.

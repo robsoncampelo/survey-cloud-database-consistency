@@ -1,0 +1,41 @@
+\begin{comment}
+{\color{yellow}
+\noindent
+\textbf{(versão anterior)}\par
+In the category of consistency guarantee methods, we have described the \textit{per-record timeline consistency} method \cite{cooper2008pnuts}. This method was designed in order to achieve the Yahoo!’s applications consistency requirements, thus it is based on the experience with many web applications. The main contribution of this method is the conception that in a scenario of replicated data storage in web applications, consistency can be achievable by the control of events (inserts, updates and deletes) in a timeline. This control is based on a sequence number that consists of the generation and the versioning of the record, where each update of an existing record implies a new version. A consistent version from the timeline is returned if a read operation is performed of any replica, which always move forward in the timeline.
+
+The approach of object versioning is also exploited by the clock-based strict consistency method. Clock-SI \cite{Du2013} and Spanner \cite{Corbett:2013} capture similar idea in the ordering of events by the exploitation of clock-based mechanisms in order to keep track of the ordering of transactions.
+
+We observe that the ordering of events is a well-understood approach in distributed systems \cite{fidge1991logical, lamport1978time, mattern1989virtual}. The concept of one event happening before another represents a causal relationship and the total ordering of this events can be used for solving synchronization issues, so that the methods above described extend this concept on their particular approaches.
+
+In the category of consistency auditing methods we have described \textit{consistency verifying protocols}  \cite{BrandenburgerCK15, MukundanML12}   and \textit{consistency auditing}\cite{liu2014consistency}. In general, these methods are suitable for scenarios where multiple clients cooperate on a remotely data stored in a potentially misbehaving service, and they need rely on the cloud service provider regarding the confidentiality and correctness of their data. Furthermore, these clients need to verify if the data updates that are requested are correctly executed on all remotely stored copies, whereas the consistency level required is maintained.
+
+Regarding the dynamic consistency methods there are \textit{automated and self-adaptive consistency} \cite{chihoub2012harmony, esteves2012quality, Terry:2013} and \textit{flexible consistency guarantees} methods \cite{Chen:2014, sivasubramanian2012amazon}. Instead of to apply the same consistency guarantee methods' approach, the automated and self-adaptive are focused in achieve automaticity in their consistency guarantees by the use of mechanisms that adjust the degrees of consistency without human intervention. This is an important feature for applications that have temporal characteristics, which require dynamic adjustment in the consistency requisites of data over time and real-time workload cloud storage systems. Moreover, the flexible guarantees approach seeks to address the applications’ consistency requirements and flexibly adapt to predefined consistency models.
+}
+\end{comment}
+
+\vspace{2mm}
+As proposed in Section~4, consistency methods can be grouped in three categories: static consistency methods, dynamic consistency methods and consistency monitoring methods.
+
+Static Consistency methods are mostly based on versioning of events. This captures the idea of event ordering by means of control strategies such as a sequence number that represents a data object version or clock-based mechanisms. We note that this is a well-understood concept in distributed systems~\cite{fidge1991logical, lamport1978time, mattern1989virtual}. The idea of an event happening before another represents a causal relationship and the total ordering of events among the replicas has been shown quite useful for solving synchronization issues related to data consistency. Thus, consistency methods in this category extend this concept on specific scenarios.
+
+Dynamic consistency methods, in turn, generally aim to provide mechanisms that adjust the degree of consistency without human intervention. This is an important feature for applications that have temporal characteristics, 
+%which requires the dynamic adjustment of the consistency requirements overtime, 
+as well as for real-time workload cloud storage systems. Specifically, flexible consistency methods are suitable to address applications’ consistency requirements that need to adapt to predefined consistency models.
+
+On the other hand, consistency monitoring methods do not provide specific guarantees, but focus on detecting the occurrence of consistency violations in the cloud data storage.  Despite that, these methods offer significant contributions that are suitable for scenarios where multiple clients cooperate on data remotely stored in a potentially misbehaving service, and need to rely on the Cloud Service Provider to guarantee their confidentiality and correctness. Furthermore, those clients need to verify if the requested data updates 
+%that are 
+{\al were} correctly executed on all remotely stored copies, while maintaining the required consistency level.
+
+Finally, Table~\ref{tab:storageRequirements} summarizes the storage requirements supported by the systems that we have surveyed in order to stress what are the main consistency trade-offs considered by them. Note that we only address those systems that implement %consistency guarantee and dynamic consistency 
+a specific consistency method, since consistency monitoring methods only focus on detecting consistency violations. 
+%so that in the Table~1 the storage requirements are not applied to the consistency auditing category. 
+Table~\ref{tab:storageRequirements} also shows that availability and scalability are the most addressed storage requirements supported by the surveyed system, whereas elasticity is the least one. 
+%is not widely addressed by them.} 
+
+As previously mentioned, existing trade-offs determined by the CAP theorem imply that applications must sacrifice consistency under certain scenarios to be able to satisfy other application requirements. This suggests that most of the consistency methods are also involved in providing other features such as high availability and scalability, even reducing the degree of consistency to a level that may be deemed acceptable.
+
+Although elasticity is not exploited by most of the surveyed systems, this is a desirable and important feature for large scale applications. It is characterized by the ability to deal with load increases by adding more resources during high demand and releasing them when load decreases. {\rc Elasticity differs from scalability in sense that the latter is a static property of the system whereas the former is a dynamic feature that allows the system’s scale to be increased~\cite{agrawal2011database}. For instance, a scalable system might scale to hundreds or even to thousands of nodes. In contrast, an elastic system can scale from 10 servers to 20 servers (or vice-versa) on-demand.}
+%While scalability is a static property of the system, elasticity is a dynamic feature that allows the system’s scale to be increased on-demand~\cite{agrawal2011database}. 
+Therefore, we argue that it would be important to identify the challenges for supporting an elastic and consistent cloud data store.
+\vspace{1.6mm}

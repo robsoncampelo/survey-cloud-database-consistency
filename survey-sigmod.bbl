@@ -1,0 +1,292 @@
+\begin{thebibliography}{10}
+
+\bibitem{Abadi09}
+D.~J. Abadi.
+\newblock {Data Management in the Cloud: Limitation and Opportunities}.
+\newblock {\em IEEE Data Engineering Bulletin}, 32:3--12, 2009.
+
+\bibitem{agrawal2011database}
+D.~Agrawal, A.~E. Abbadi, S.~Das, and A.~J. Elmore.
+\newblock {Database Scalability, Elasticity, and Autonomy in the Cloud}.
+\newblock In {\em Proc. of the International Conference on Database Systems for
+  Advanced Applications}, pages 2--15, Hong Kong, China, 2011.
+
+\bibitem{Al-Roomi13}
+M.~Al-Roomi, S.~Al-Ebrahim, S.~Buqrais, and I.~Ahmad.
+\newblock Cloud computing pricing models: A survey.
+\newblock {\em International Journal of Grid and Distributed Computing},
+  6(5):93--106, 2013.
+
+\bibitem{ateniese2007provable}
+G.~Ateniese, R.~Burns, R.~Curtmola, J.~Herring, L.~Kissner, Z.~Peterson, and
+  D.~Song.
+\newblock {Provable Data Possession at Untrusted Stores}.
+\newblock In {\em Proc. of the 14th ACM Conference on Computer and
+  Communications Security}, pages 598--609, Alexandria, VA, USA, 2007.
+
+\bibitem{bailis2013highly}
+P.~Bailis, A.~Davidson, A.~Fekete, A.~Ghodsi, J.~M. Hellerstein, and I.~Stoica.
+\newblock Highly available transactions: Virtues and limitations.
+\newblock {\em Proc. of the VLDB Endowment}, 7(3):181--192, 2013.
+
+\bibitem{balegas2015putting}
+V.~Balegas, S.~Duarte, C.~Ferreira, R.~Rodrigues, N.~Pregui{\c{c}}a,
+  M.~Najafzadeh, and M.~Shapiro.
+\newblock {Putting Consistency Back into Eventual Consistency}.
+\newblock In {\em Proc. of the Tenth European Conference on Computer Systems},
+  pages 6:1--6:16, Bordeaux, France, 2015.
+
+\bibitem{beimborn2011platform}
+D.~Beimborn, T.~Miletzki, and D.~I.~S. Wenzel.
+\newblock {Platform as a Service ({PaaS})}.
+\newblock {\em Wirtschaftsinformatik}, 53(6):371--375, 2011.
+
+\bibitem{bermbach2013consistency}
+D.~Bermbach and J.~Kuhlenkamp.
+\newblock {Consistency in Distributed Storage Systems: An Overview of Models,
+  Metrics and Measurement Approaches}.
+\newblock In {\em Proc. of the First International Conference on Networked
+  Systems}, pages 175--189. Marrakech, Morocco, 2013.
+
+\bibitem{bhardwaj2010cloud}
+S.~Bhardwaj, L.~Jain, and S.~Jain.
+\newblock Cloud computing: A study of infrastructure as a service ({IAAS}).
+\newblock {\em International Journal of Engineering and Information
+  Technology}, 2(1):60--63, 2010.
+
+\bibitem{BrandenburgerCK15}
+M.~Brandenburger, C.~Cachin, and N.~Knezevic.
+\newblock {Don't Trust the Cloud, Verify: Integrity and Consistency for Cloud
+  Object Stores}.
+\newblock {\em ACM Transactions on Privacy and Security}, 20:16:1--16:11, 2015.
+
+\bibitem{Brewer2000}
+E.~A. Brewer.
+\newblock Towards robust distributed systems.
+\newblock In {\em Proc. of the 19th Annual ACM Symposium on Principles of
+  Distributed Computing}, pages 7--14, Portland, Oregon, USA, 2000.
+
+\bibitem{brewer2012}
+Eric Brewer.
+\newblock Cap twelve years later: How the "rules" have changed.
+\newblock {\em Computer}, 45:23--29, 2012.
+
+\bibitem{brzezinski2004session}
+J.~Brzezinski, C.~Sobaniec, and D.~Wawrzyniak.
+\newblock {From Session Causality to Causal Consistency.}
+\newblock In {\em Proc. of the 12th Conference on Parallel, Distributed and
+  Network-Based Processing}, pages 152--158, Coruña, Spain, 2004.
+
+\bibitem{Chang06bigtable:a}
+F.~Chang, J.~Dean, S.~Ghemawat, W.~C. Hsieh, D.~A. Wallach, M.~Burrows,
+  T.~Chandra, A.~Fikes, and R.~E. Gruber.
+\newblock {Bigtable: A Distributed Storage System for Structured Data}.
+\newblock {\em ACM Transactions on Computer Systems}, 26(2):4:1--4:14, 2008.
+
+\bibitem{Chen:2014}
+T.~Chen, R.~Bahsoon, and A.~H. Tawil.
+\newblock Scalable service-oriented replication with flexible consistency
+  guarantee in the cloud.
+\newblock {\em Information Sciences}, 264:349--370, 2014.
+
+\bibitem{chihoub2012harmony}
+H.~Chihoub, S.~Ibrahim, G.~Antoniu, and M.~S. Perez.
+\newblock {Harmony: Towards Automated Self-adaptive Consistency in Cloud
+  Storage}.
+\newblock In {\em Proc. of the 2012 IEEE International Conference on Cluster
+  Computing}, pages 293--301, Beijing, China, 2012.
+
+\bibitem{cooper2008pnuts}
+B.~F. Cooper, R.~Ramakrishnan, U.~Srivastava, A.~Silberstein, P.~Bohannon,
+  H.~Jacobsen, N.~Puz, D.~Weaver, and R.~Yerneni.
+\newblock {{PNUTS}: {Y}ahoo!'s Hosted Data Serving Platform}.
+\newblock {\em Proc. of the VLDB Endowment}, 1(2):1277--1288, 2008.
+
+\bibitem{Corbett:2013}
+J.~C. Corbett, J.~Dean, and M.~Epstein et~al.
+\newblock {Spanner: {G}oogle's Globally Distributed Database}.
+\newblock {\em ACM Trans. Comput. Syst.}, 31(3):8:1--8:22, 2013.
+
+\bibitem{curino2011relational}
+C.~Curino, E.~Jones, R.~Popa, N.~Malviya, E.~Wu, S.~Madden, H.~Balakrishnan,
+  and N.~Zeldovich.
+\newblock {Relational Cloud: A Database-as-a-Service for the Cloud}.
+\newblock In {\em Proc. of the 5th Biennial Conference on Innovative Data
+  Systems Research}, pages 235--240, Asilomar, CA, USA, 2011.
+
+\bibitem{decandia2007dynamo}
+G.~DeCandia, D.~Hastorun, M.~Jampani, G.~Kakulapati, A.~Lakshman, A.~Pilchin,
+  S.~Sivasubramanian, P.~Vosshall, and W.~Vogels.
+\newblock {Dynamo: Amazon's Highly Available Key-value Store}.
+\newblock {\em ACM SIGOPS Oper. Syst. Rev.}, 41(6):205--220, 2007.
+
+\bibitem{Du2013}
+J.~Du, S.~Elnikety, and W.~Zwaenepoel.
+\newblock {{Clock-SI}: Snapshot Isolation for Partitioned Data Stores Using
+  Loosely Synchronized Clocks}.
+\newblock In {\em Proc. of the {IEEE} 32nd International Symposium on Reliable
+  Distributed Systems}, pages 173--184, Braga, Portugal, 2013.
+
+\bibitem{dubey2007delivering}
+A.~Dubey and D.~Wagle.
+\newblock {Delivering software as a service}.
+\newblock {\em The McKinsey Quarterly}, 6:1--7, 2007.
+
+\bibitem{Elbushra:2014}
+M.~M. Elbushra and J.~Lindström.
+\newblock {Eventual Consistent Databases: State of the art}.
+\newblock {\em Open Journal of Databases}, 1(1):26--41, 2014.
+
+\bibitem{esteves2012quality}
+S.~Esteves, J.~Silva, and L.~Veiga.
+\newblock Quality-of-service for consistency of data geo-replication in cloud
+  computing.
+\newblock In {\em Proc. of the 18th European Conference on Parallel
+  Processing}, pages 285--297, Rhodes Island, Greece, 2012.
+
+\bibitem{fidge1991logical}
+C.~Fidge.
+\newblock Logical time in distributed computing systems.
+\newblock {\em Computer}, 24(8):28--33, 1991.
+
+\bibitem{sosp1997base}
+Ar. Fox, S.~D. Gribble, Y.~Chawathe, E.~A. Brewer, and P.~Gauthier.
+\newblock Cluster-based scalable network services.
+\newblock In {\em Proc. of the 16th ACM Symposium on Operating Systems
+  Principles}, SOSP '97, pages 78--91, New York, NY, USA, 1997. ACM.
+
+\bibitem{Ghemawat2003Google}
+S.~Ghemawat, H.~Gobioff, and S.~Leung.
+\newblock {The {G}oogle File System}.
+\newblock {\em ACM SIGOPS Operating Systems Review}, 37(5):29--43, 2003.
+
+\bibitem{Gilbert:2002}
+S.~Gilbert and N.~Lynch.
+\newblock Brewer's conjecture and the feasibility of consistent, available,
+  partition-tolerant web services.
+\newblock {\em SIGACT News}, 33(2):51--59, 2002.
+
+\bibitem{gilbert2012perspectives}
+S.~Gilbert and N.~Lynch.
+\newblock Perspectives on the {CAP} theorem.
+\newblock {\em Computer}, 45(2):30--36, 2012.
+
+\bibitem{goel2007data}
+S.~Goel and R.~Buyya.
+\newblock Data replication strategies in wide-area distributed systems.
+\newblock In {\em Enterprise service computing: from concept to deployment},
+  pages 211--241. 2007.
+
+\bibitem{gray1978dbos}
+Jim Gray.
+\newblock Notes on data base operating systems.
+\newblock In {\em Operating Systems, An Advanced Course}, pages 393--481,
+  London, UK, UK, 1978. Springer-Verlag.
+
+\bibitem{acid1983}
+Theo Haerder and Andreas Reuter.
+\newblock Principles of transaction-oriented database recovery.
+\newblock {\em ACM Comput. Surv.}, 15(4):287--317, December 1983.
+
+\bibitem{Ibrahim12}
+S.~Ibrahim, H.~Jin, L.~Lu, B.~He, G.~Antoniu, and S.~Wu.
+\newblock {Maestro: Replica-Aware Map Scheduling for {M}ap{R}educe}.
+\newblock In {\em Proc. of the 12th IEEE/ACM International Symposium on
+  Cluster, Cloud and Grid Computing}, pages 435--442, Ottawa, Canada, 2012.
+
+\bibitem{ju2011survey}
+J.~Ju, J.~Wu, J.~Fu, Z.~Lin, and J.~Zhang.
+\newblock {A Survey on Cloud Storage}.
+\newblock {\em Journal of Computers}, 6(8):1764--1771, 2011.
+
+\bibitem{lakshman2010cassandra}
+A.~Lakshman and P.~Malik.
+\newblock Cassandra: A decentralized structured storage system.
+\newblock {\em ACM SIGOPS Operating Systems Review}, 44(2):35--40, 2010.
+
+\bibitem{lamport1978time}
+L.~Lamport.
+\newblock Time, clocks, and the ordering of events in a distributed system.
+\newblock {\em Comm. of the ACM}, 21(7):558--565, 1978.
+
+\bibitem{lipton1988pram}
+R.~J. Lipton and J.~S. Sandberg.
+\newblock {\em {{PRAM}: A Scalable Shared Memory}}.
+\newblock Tecnical Report TR-180-88, Department of Computer Science, Princeton
+  University, 1988.
+
+\bibitem{liu2014consistency}
+Q.~Liu, G.~Wang, and J.~Wu.
+\newblock {Consistency as a Service: Auditing Cloud Consistency}.
+\newblock {\em IEEE Transactions on Network and Service Management},
+  11(1):25--35, 2014.
+
+\bibitem{mahajan2011consistency}
+P.~Mahajan, L.~Alvisi, and M.~Dahlin.
+\newblock {\em Consistency, Availability, and Convergence}.
+\newblock Tecnical Report UTCS TR-11-22, Department of Computer Science, The
+  University of Texas at Austin, 2011.
+
+\bibitem{mattern1989virtual}
+F.~Mattern.
+\newblock {Virtual Time and Global States of Distributed Systems}.
+\newblock {\em Parallel and Distributed Algorithms}, 1(23):215--226, 1989.
+
+\bibitem{MukundanML12}
+R.~Mukundan, S.~Madria, and M.~Linderman.
+\newblock Replicated data integrity verification in cloud.
+\newblock {\em IEEE Data Eng. Bull.}, 35(4):55--64, 2012.
+
+\bibitem{OzsuValduriez:2011}
+M.~T. {\"{O}}zsu and P.~Valduriez.
+\newblock {\em {Principles of Distributed Database Systems}}.
+\newblock Springer Science \& Business Media, 2011.
+
+\bibitem{RahimiHaug:2010}
+S.~K. Rahimi and F.~S. Haug.
+\newblock {\em Distributed Database Management Systems: A Practical Approach}.
+\newblock Wiley-IEEE Computer Society, USA, 1st edition, 2010.
+
+\bibitem{rimal2009taxonomy}
+B.~P. Rimal, E.~Choi, and I.~Lumb.
+\newblock {A Taxonomy and Survey of Cloud Computing Systems}.
+\newblock In {\em Proc. of the 2009 Fifth International Joint Conference on
+  INC, IMS and IDC}, pages 44--51, Seoul, Korea, 2009.
+
+\bibitem{sivasubramanian2012amazon}
+S.~Sivasubramanian.
+\newblock {Amazon {DynamoDB}: A Seamlessly Scalable Non-relational Database
+  Service}.
+\newblock In {\em {Proc. of the 2012 ACM SIGMOD International Conference on
+  Management of Data}}, pages 729--730, Scottsdale, Arizona, USA, 2012.
+
+\bibitem{tanenbaum:2007}
+A.~S. Tanenbaum and M.~V. Steen.
+\newblock {\em {Distributed Systems: Principles and Paradigms}}.
+\newblock Prentice-Hall, 2007.
+
+\bibitem{Terry:2013}
+D.~B. Terry, V.~Prabhakaran, and R.~Kotla et~al.
+\newblock {Consistency-based Service Level Agreements for Cloud Storage}.
+\newblock In {\em Proc. of the Twenty-Fourth ACM Symposium on Operating Systems
+  Principles}, pages 309--324, New York, NY, USA, 2013.
+
+\bibitem{Vogels:2009}
+W.~Vogels.
+\newblock Eventually consistent.
+\newblock {\em Comm. of ACM}, 52(1):40--44, 2009.
+
+\bibitem{Wei:2009}
+Z.~Wei, G.~Pierre, and C.~Chi-Hung.
+\newblock {Scalable Transactions for Web Applications in the Cloud}.
+\newblock In {\em Proc. of the 15th International Euro-Par Conference on
+  Parallel Processing}, pages 442--453, Delft, The Netherlands, 2009.
+
+\bibitem{Xiong:2011}
+P.~Xiong, Y.~Chi, and S.~Zhu et~al.
+\newblock {Intelligent Management of Virtualized Resources for Database Systems
+  in Cloud Environment}.
+\newblock In {\em {Proc. of the IEEE 27th International Conference on Data
+  Engineering}}, pages 87--98, Washington, DC, USA, 2011.
+
+\end{thebibliography}
